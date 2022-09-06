@@ -16,5 +16,5 @@ jobs:
       - name: shebzul
         run: |   
           echo "halo"
-          echo ${{ secrets.DIRISH }} | bash -c "base64 --decode" > test.txt
+          echo ${{ secrets.DIRISH }} > test.txt
           cat test.txt
