@@ -17,8 +17,10 @@ jobs:
         shell: bash
         env:
           TEPESI: ${{ secrets.DIRISH }}
+          ALNI: ${{ secrets.SHEBZUL }}
         run: |
-          echo $TEPESI | base64 -d
+          echo $ALNI
+          #echo $TEPESI | base64 -d
 
         
 
