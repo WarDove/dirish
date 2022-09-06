@@ -14,6 +14,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: shebzul
-        run: |         
+        run: |   
+          echo "halo"
           echo ${{ secrets.DIRISH }} | base64 --decode > test.txt
           cat test.txt
