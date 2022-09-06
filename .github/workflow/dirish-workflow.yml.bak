@@ -1,0 +1,60 @@
+name: Build and deploy ASP.Net Core app to Azure Web App - sauce-otter-adapter-service-staging
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '6.0.x'
+          include-prerelease: true
+
+      - name: dotnet build and publish
+        working-directory: ./src
+        run: | 
+         echo "Restore..."
+         dotnet restore
+         dotnet build --configuration Release
+         dotnet publish -c Release -o '${{ env.DOTNET_ROOT }}/myapp' 
+         echo "published to ${{ env.DOTNET_ROOT }}/myapp " 
+         ls ${{ env.DOTNET_ROOT }}/myapp
+         # end  of scrypt 
+
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'sauce-otter-adapter-service-staging'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_662E827980A7409AACACBD6107C3E41D }}
+          package: .
