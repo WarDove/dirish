@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: shebzul
         env:
-          ALNI: ${{ secrets.SHEBZUL }}
+          ALNI: ${{ secrets.DIRISH }}
         run: |
           mkdir myapp
           touch testfile
