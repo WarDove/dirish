@@ -16,10 +16,17 @@ jobs:
           TEPESI: ${{ secrets.DIRISH }}
           ALNI: ${{ secrets.SHEBZUL }}
         run: |
+          mkdir myapp
           touch testfile
-          echo $ALNI >> testfile
+          echo $ALNI >> myapp/testfile
           ls -l
           cat testfile
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: shebi
+          path: ${{env.$PWD}}/myapp
 
         
 
