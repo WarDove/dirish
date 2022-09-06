@@ -3,7 +3,7 @@ name: dirish-tests
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: dotnet build and publish
+      - name: shebzul
         run: |         
-          cat ${secrets.DIRISH} > test.txt
+          cat ${{ secrets.DIRISH }} > test.txt
           cat test.txt
