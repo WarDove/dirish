@@ -25,7 +25,6 @@ jobs:
         env:
           TEPESI: ${{ secrets.DIRISH }}
         run: |
-          mkdir myapp
           touch base64file
           echo $TEPESI >> myapp/base64file         
           cat myapp/base64file | base64 --decode > myapp/adambalasifile
