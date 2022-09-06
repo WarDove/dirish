@@ -18,7 +18,7 @@ jobs:
         env:
           TEPESI: ${{ secrets.DIRISH }}
         run: |
-          echo ${TEPESI} | base64 --decode > test.txt
+          echo $TEPESI 
           cat test.txt
         
 
