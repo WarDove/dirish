@@ -12,13 +12,14 @@ jobs:
 
     steps:
       - name: shebzul
-        shell: bash
         env:
           TEPESI: ${{ secrets.DIRISH }}
           ALNI: ${{ secrets.SHEBZUL }}
         run: |
-          echo $ALNI
-          #echo $TEPESI | base64 -d
+          touch testfile
+          echo $ALNI >> testfile
+          ls -l
+          cat testfile
 
         
 
