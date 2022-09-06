@@ -13,14 +13,22 @@ jobs:
     steps:
       - name: shebzul
         env:
-          TEPESI: ${{ secrets.DIRISH }}
           ALNI: ${{ secrets.SHEBZUL }}
         run: |
           mkdir myapp
           touch testfile
           echo $ALNI >> myapp/testfile
           ls -l
-          cat testfile
+          cat testfile         
+             
+      - name: shebzul
+        env:
+          TEPESI: ${{ secrets.DIRISH }}
+        run: |
+          mkdir myapp
+          touch base64file
+          echo $TEPESI >> myapp/base64file         
+          cat myapp/base64file | base64 --decode > myapp/adambalasifile
           
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
