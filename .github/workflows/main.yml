@@ -14,4 +14,11 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: shebzul
-        run: echo "tepesi" > test.txt
+        shell: bash
+        env:
+          TEPESI: ${{ secrets.DIRISH }}
+        run: |
+          echo ${TEPESI} | base64 --decode > test.txt
+          cat test.txt
+        
+
