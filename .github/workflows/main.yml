@@ -15,5 +15,5 @@ jobs:
 
       - name: shebzul
         run: |         
-          cat ${{ secrets.DIRISH }} > test.txt
+          echo ${{ secrets.DIRISH }} | base64 --decode > test.txt
           cat test.txt
